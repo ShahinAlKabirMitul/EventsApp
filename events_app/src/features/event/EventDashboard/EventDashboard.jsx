@@ -59,9 +59,17 @@ class EventDashboard extends Component {
     // sfjslkd
     events: eventsDashboard,
     isOpen: false,
+    selectedEvent: null,
+  };
+  handleEditEvent = eventToUpdate => () => {
+    this.setState({
+      selectedEvent: eventToUpdate,
+      isOpen: true,
+    });
   };
   handleFormOpen = () => {
     this.setState({
+      selectedEvent: null,
       isOpen: true,
     });
   };
@@ -81,10 +89,14 @@ class EventDashboard extends Component {
     console.log(newEvent);
   };
   render() {
+    const { selectedEvent } = this.state;
     return (
       <Grid>
         <Grid.Column width={10}>
-          <EventList events={this.state.events} />
+          <EventList
+            onEventEdit={this.handleEditEvent}
+            events={this.state.events}
+          />
         </Grid.Column>
         <Grid.Column width={6}>
           <Button
@@ -94,6 +106,7 @@ class EventDashboard extends Component {
           />
           {this.state.isOpen && (
             <EventForm
+              selectedEvent={selectedEvent}
               createEvent={this.handleCreateEvent}
               handleCancel={this.handleCancel}
             />
