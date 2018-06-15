@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import { Segment, Form, Button } from 'semantic-ui-react';
 class EventForm extends Component {
+  onFromSubmit = evt => {
+    evt.preventDefault();
+    console.log(this.refs.title.value);
+  };
   render() {
     const { handleCancel } = this.props;
     return (
       <Segment>
-        <Form>
+        <Form onSubmit={this.onFromSubmit}>
           <Form.Field>
             <label>Event Title</label>
-            <input placeholder="First Name" />
+            <input ref="title" placeholder="Event Name" />
           </Form.Field>
           <Form.Field>
             <label>Event Date</label>
