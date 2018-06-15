@@ -55,6 +55,7 @@ const eventsDashboard = [
 
 class EventDashboard extends Component {
   state = {
+    // sfjslkd
     events: eventsDashboard,
     isOpen: false,
   };
