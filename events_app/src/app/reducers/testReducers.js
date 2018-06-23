@@ -1,7 +1,7 @@
 const initialState = {
-    data: 707
+    data: 850
 }
-const testReducer = (state = initialState,action)=>{
+const testReducer = (state = initialState, action) => {
     return state;
 }
 export default testReducer;
