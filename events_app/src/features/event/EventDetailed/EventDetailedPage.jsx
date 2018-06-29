@@ -11,7 +11,7 @@ const mapState = (state, ownProps) => {
   const eventId = ownProps.match.params.id;
   let event ={};
   if(eventId && state.events.length >0){
-    event = state.events[0];
+    event = state.events.filter( (event)=> event.id === eventId )[0];
   }
   return  {
     event
