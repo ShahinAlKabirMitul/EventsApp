@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {reduxForm,Field} from 'redux-form';
 import cuid from 'cuid';
 import {createEvent,updateEvent} from '../eventActions'
+import TextInput from '../../../app/common/form/TextInput';
 
 
 const mapState = (state,ownProps) => {
@@ -61,7 +62,7 @@ class EventForm extends Component {
     return (
       <Segment>
         <Form onSubmit={this.onFromSubmit}>
-          <Field name='title' type='text' component='input'  placeholder='Event Title'/>
+          <Field name='title' type='text' component={TextInput}  placeholder='Give your evant a name'/>
           <Form.Field>
             <label>Event Date</label>
             <input
