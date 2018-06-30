@@ -9,18 +9,12 @@ import TextArea from '../../../app/common/form/TextArea';
 import SelectInput from '../../../app/common/form/SelectInput';
 const mapState = (state,ownProps) => {
   const eventId = ownProps.match.params.id;
-  let event={
-    title: '',
-    date: '',
-    city: '',
-    venue: '',
-    hostedBy: '',
-  }
+  let event={};
   if(eventId && state.events.length >0 ){
     event = state.events.filter( (event) => event.id === eventId)[0];
   }
   return {
-    event
+    initialValues: event
   }
 }
 const actions = {
@@ -36,18 +30,19 @@ const category = [
     {key: 'travel', text: 'Travel', value: 'travel'},
 ];
 class EventForm extends Component {
-  onFromSubmit = evt => {
-    evt.preventDefault();
-    if(this.state.event.id){
-      this.props.updateEvent(this.state.event);
-      console.log(this.state.event);
+
+
+  onFromSubmit = values => {
+    if(this.props.initialValues.id){
+      this.props.updateEvent(values);
       this.props.history.goBack();
     }
     else{
       const newEvent ={
-        ...this.state.event,
+        ...values,
         id: cuid(),
-        hostPhotoURL: '/assets/user.png'
+        hostPhotoURL: '/assets/user.png',
+        hostedBy:'Bob'
       }
       this.props.createEvent(newEvent);
       this.props.history.push('/events')
@@ -61,7 +56,7 @@ class EventForm extends Component {
         <Grid.Column width={10}>
             <Segment>
               <Header sub color='teal' content='Event Details' />
-              <Form onSubmit={this.onFromSubmit}>
+              <Form onSubmit={this.props.handleSubmit( this.onFromSubmit)}>
              
                 <Field name='title' type='text' component={TextInput}  placeholder='Give your evant a name'/>
                 <Field name='category' type='text' component={SelectInput} options={category}           placeholder='What is your event about'/>
@@ -85,4 +80,4 @@ class EventForm extends Component {
     );
   }
 }
-export default connect(mapState,actions) (reduxForm({form : 'EventForm'})(EventForm));
+export default connect(mapState,actions) (reduxForm({form : 'EventForm',enableReinitialize:true})(EventForm));
