@@ -1,6 +1,4 @@
-import {
-  createReducer
-} from '../../app/common/util/reducerUtil';
+import { createReducer} from '../../app/common/util/reducerUtil';
 import {
   CREATE_EVENT,
   UPDATE_EVENT,
