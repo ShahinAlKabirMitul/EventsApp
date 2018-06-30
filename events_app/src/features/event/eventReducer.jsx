@@ -58,8 +58,6 @@ export const createEvent = (state, payload) => {
 }
 
 export const updateEvent = (state, payload) => {
-  console.log('State', state);
-  console.log('payload', payload);
   return [
 
     ...state.filter(event => event.id !== payload.event.id),

@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {reduxForm,Field} from 'redux-form';
 import {composeValidators,combineValidators,isRequired,hasLengthGreaterThan} from 'revalidate';
 import cuid from 'cuid';
+import moment from 'moment'
 import {createEvent,updateEvent} from '../eventActions'
 import TextInput from '../../../app/common/form/TextInput';
 import TextArea from '../../../app/common/form/TextArea';
@@ -40,13 +41,15 @@ const validate = combineValidators({
     hasLengthGreaterThan(4)({message:'Description needs to be at lest 5 characters'})
   )(),
   city: isRequired('city'),
-  venue: isRequired('venue')
+  venue: isRequired('venue'),
+  date : isRequired('date')
 
 })
 class EventForm extends Component {
 
 
   onFromSubmit = values => {
+    values.date = moment(values.date).format();
     if(this.props.initialValues.id){
       this.props.updateEvent(values);
       this.props.history.goBack();
@@ -80,7 +83,7 @@ class EventForm extends Component {
                 <Field name='city' type='text' component={TextInput}  placeholder='Event City'/>
                 <Field name='venue' type='text' component={TextInput}  placeholder='Event Venue'/>
                 <Field name='date' type='text' component={DateInput} 
-                  dateFormat='YYYY/MM/DD HH:mm'
+                  dateFormat='YYYY-MM-DD HH:mm'
                   timeFormat='HH:mm'
                   showTimeSelect
                   placeholder='Date & Time of Event'/>
