@@ -71,9 +71,25 @@ class EventForm extends Component {
       } )
       
   }
+  handleVenueSelect = (selectedVenue) => {
+    geocodeByAddress(selectedVenue)
+      .then(result => getLatLng(result[0]))
+      .then(latLng => {
+        this.setState({
+          venueLatLng : latLng
+        });
+      })
+      .then( ()=> {
+        this.props.change('venue',selectedVenue);
+      } )
+      
+  }
 
   onFromSubmit = values => {
     values.date = moment(values.date).format();
+    values.venueLatLng = this.state.venueLatLng;
+    console.log( this.props.venueLatLng);
+    console.log( values);
     if(this.props.initialValues.id){
       this.props.updateEvent(values);
       this.props.history.goBack();
@@ -122,12 +138,14 @@ class EventForm extends Component {
                    radius:1000,
                    type: ['(establishment)']
                   }}
-                 component={PlaceInput}  placeholder='Event Venue'/>
+                  onSelect={this.handleVenueSelect}
+                  component={PlaceInput}  placeholder='Event Venue'/>
                 }
                 <Field name='date' type='text' component={DateInput} 
                   dateFormat='YYYY-MM-DD HH:mm'
                   timeFormat='HH:mm'
                   showTimeSelect
+                
                   placeholder='Date & Time of Event'/>
             
                 <Button disabled={invalid || submitting || pristine} positive type="submit">
