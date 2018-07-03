@@ -4,13 +4,13 @@ import EventDetailedMap from './EventDetailedMap';
 
 class EventDetailedInfo extends Component {
   state = {
-    showMap : false
-  }
+    showMap: false,
+  };
   shopMapToggle = () => {
     this.setState(prevState => ({
-      showMap : !prevState.showMap
-    }))
-  }
+      showMap: !prevState.showMap,
+    }));
+  };
   render() {
     const { event } = this.props;
     return (
@@ -44,13 +44,21 @@ class EventDetailedInfo extends Component {
               <span>{event.venue}</span>
             </Grid.Column>
             <Grid.Column width={4}>
-              <Button onClick={this.shopMapToggle} color="teal" size="tiny" content={this.state.showMap ? 'Hide Map' : 'Show Map'} />
+              <Button
+                onClick={this.shopMapToggle}
+                color="teal"
+                size="tiny"
+                content={this.state.showMap ? 'Hide Map' : 'Show Map'}
+              />
             </Grid.Column>
           </Grid>
         </Segment>
-        {this.state.showMap && 
-         <EventDetailedMap lat={event.venueLatLng.lat}  lng={event.venueLatLng.lng}/>
-        }
+        {this.state.showMap && (
+          <EventDetailedMap
+            lat={event.venueLatLng.lat}
+            lng={event.venueLatLng.lng}
+          />
+        )}
       </Segment.Group>
     );
   }
