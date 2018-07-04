@@ -7,7 +7,7 @@ const initialState = {
 export const loginUser = (state, payload) => {
   return {
     ...state,
-    authonticated: true,
+    authenticated: true,
     currentUser: payload.creds.email,
   };
 };
@@ -15,7 +15,7 @@ export const loginUser = (state, payload) => {
 export const signOutUser = (state, payload) => {
   return {
     ...state,
-    authonticated: false,
+    authenticated: false,
     currentUser: {},
   };
 };

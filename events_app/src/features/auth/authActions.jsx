@@ -4,7 +4,7 @@ export const login = creds => {
   return {
     type: LOGIN_USER,
     payload: {
-      creds,
+      creds
     },
   };
 };
