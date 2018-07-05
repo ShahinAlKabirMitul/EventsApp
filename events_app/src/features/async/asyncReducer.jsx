@@ -6,23 +6,23 @@ import {
 } from './asyncConstents';
 
 const initialState = {
-  laoding: false,
+  loading: false,
 };
 
 export const asyncActionStarted = state => {
-  return { ...state, laoding: true };
+  return { ...state, loading: true };
 };
 
 export const asyncActionFinished = state => {
-  return { ...state, laoding: false };
+  return { ...state, loading: false };
 };
 
 export const asyncActionError = state => {
-  return { ...state, laoding: false };
+  return { ...state, loading: false };
 };
 
-export default createReducer(initialState,{
+export default createReducer(initialState, {
   [ASYNC_ACTION_START]: asyncActionStarted,
   [ASYNC_ACTION_FINISH]: asyncActionFinished,
-  [ASYNC_ACTION_ERROR] : asyncActionError
-})
+  [ASYNC_ACTION_ERROR]: asyncActionError,
+});
