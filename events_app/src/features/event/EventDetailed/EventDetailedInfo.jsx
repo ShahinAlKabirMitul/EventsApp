@@ -7,6 +7,11 @@ class EventDetailedInfo extends Component {
   state = {
     showMap: false,
   };
+  componentWillMount() {
+    this.setState({
+      showMap: false,
+    });
+  }
   shopMapToggle = () => {
     this.setState(prevState => ({
       showMap: !prevState.showMap,
