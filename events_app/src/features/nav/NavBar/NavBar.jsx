@@ -10,7 +10,7 @@ import { logout } from '../../auth/authActions';
 
 const actions = {
   openModal,
-  logout,
+ 
 };
 
 const mapState = state => ({
